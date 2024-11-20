@@ -14,14 +14,14 @@ import os
 import zipfile
 import shutil
 import json
-data_f = 'conf_cronas.json'
+data_f = 'output.json'
 data = {}
 if data_f in os.listdir():
-    with open('conf_cronas.json', 'r') as file:
+    with open(data_f, 'r') as file:
         data = json.load(file)
 else:
     data = {"a":"2023-02-12 12:51","b":"2023-02-12 12:51"}
-    with open('output.json', 'w') as file:
+    with open(data_f, 'w') as file:
         json.dump(data, file, indent=4)
 
 print(data)
@@ -86,14 +86,14 @@ def ch_time_mody(path , create ,modi ,data):#меняет время в core.xml
         #смена create index1
         current_time = get_current_time(create) 
         f[pos_time_index[0]] = f"{current_time}</dcterms:created"
-        data['a']=current_time
+        data['a']=create
         #смена modificate index2
         current_time = get_current_time(modi) 
-        data['b']=current_time
+        data['b']=modi
 
 
         
-        with open('output.json', 'w') as file:
+        with open(data_f, 'w') as file:
             json.dump(data, file, indent=4)
 
         f[pos_time_index[1]] = f"{current_time}</dcterms:modified"
